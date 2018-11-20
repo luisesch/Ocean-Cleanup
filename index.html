@@ -10,10 +10,56 @@
       href="https://fonts.googleapis.com/css?family=Raleway"
       rel="stylesheet"
     />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Game</title>
   </head>
   <body>
-    <!-- <canvas id="underwater" width="1000" height="500"></canvas> -->
+    <div class="background container">
+      <div class="start-box">
+        <div class="welcome">
+          <h1>Collect the plastic</h1>
+          <br />
+          <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
+            lobortis sagittis suscipit. Cras suscipit, lorem quis hendrerit
+            ultrices, lectus arcu consectetur risus, eu consectetur nisi sapien
+            vel justo.
+          </p>
+          <br />
+          <button id="welcome-button" class="btn btn-default btn-lg">
+            LET'S GO
+          </button>
+        </div>
+
+        <div class="form-group enter-name">
+          <label for="name">Enter your name:</label
+          ><input type="text" name="name" class="form-control" />
+          <button id="enter-name-button" class="btn btn-default btn-lg">
+            NEXT
+          </button>
+        </div>
+
+        <div class="form-group pick-diver">
+          <label for="diver">Pick a diver:</label>
+          <div class="radio">
+            <input id="#diver1" type="radio" name="diver" value="diver1" /><img
+              src="images/diver1.png"
+            />
+          </div>
+          <div class="radio">
+            <input id="diver3" type="radio" name="diver" value="diver3" /><img
+              src="images/diver3.png"
+            />
+          </div>
+          <button id="start-game-button" class="btn btn-default btn-lg">
+            START GAME
+          </button>
+        </div>
+      </div>
+    </div>
   </body>
 </html>

@@ -1,7 +1,40 @@
+body {
+  background-image: url("./images/background.png");
+  background-size: cover;
+  background-repeat: repeat;
+  font-family: Raleway;
+}
+
 canvas {
-  border: 1px solid black;
   width: 100%;
   height: 100%;
   background-image: url("images/background.png");
   background-size: cover;
+}
+
+img {
+  width: 150px;
+}
+
+label {
+  font-size: 35px;
+}
+
+input {
+  margin: 40px;
+}
+
+.start-box {
+  margin: 100px;
+  text-align: center;
+  background-color: #092243;
+  color: white;
+  padding: 40px;
+  border-radius: 10px;
+  padding: 100px;
+}
+
+.enter-name,
+.pick-diver {
+  display: none;
 }

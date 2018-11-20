@@ -7,6 +7,15 @@ window.onload = function() {
     "./images/plastic2.png",
     "./images/plastic3.png"
   ];
+  var imageDiver = "";
+
+  function selectDiver() {
+    if (document.getElementById("#diver1").checked) {
+      imageDiver = "images/diver1.png";
+    } else {
+      imageDiver = "images/diver3.png";
+    }
+  }
 
   //variable with all info on the canvas
   var myGameArea = {
@@ -17,7 +26,8 @@ window.onload = function() {
       this.context = this.canvas.getContext("2d");
       document.body.insertBefore(this.canvas, document.body.childNodes[0]);
       //create diver and first piece of plastic
-      diver = new Component("./images/diver3.png", 0, 200, 200, 100);
+      selectDiver();
+      diver = new Component(imageDiver, 0, 200, 200, 100);
       plastic = new Component("./images/plastic1.png", 1000, 200, 100, 50);
       plasticPieces.push(plastic);
     },
@@ -46,8 +56,6 @@ window.onload = function() {
       ctx.drawImage(img, this.x, this.y, this.width, this.height);
     }
   }
-
-  //creating the diver and the first piece of plastic
 
   //functions to get random plastic positions, plastic images and gaps between pieces of plastic
   function randomY() {
@@ -89,9 +97,10 @@ window.onload = function() {
 
   //draw score in the upper right corner
   function writeScore(score) {
+    var diverName = $("input").val();
     var ctx = myGameArea.context;
     ctx.font = "40px Raleway";
-    ctx.fillText("Collected: " + score, 750, 50);
+    ctx.fillText("Collected by " + diverName + ": " + score, 50, 50);
   }
 
   //updating the canvas (clearing and updating)
@@ -182,8 +191,35 @@ window.onload = function() {
     }
   };
 
-  //drawing the canvas - starting the game
-  myGameArea.start();
-  //clear and redraw (and repeat)
-  updateGameArea();
+  $("#welcome-button").click(function() {
+    $("#welcome-button")
+      .parent()
+      .hide();
+    $("#enter-name-button")
+      .parent()
+      .show();
+  });
+
+  $("#enter-name-button").click(function() {
+    $("#enter-name-button")
+      .parent()
+      .hide();
+    $("#welcome-button")
+      .parent()
+      .hide();
+    $("#start-game-button")
+      .parent()
+      .show();
+  });
+
+  $("#start-game-button").click(function() {
+    $("#start-game-button")
+      .parent()
+      .parent()
+      .hide();
+    //drawing the canvas - starting the game
+    myGameArea.start();
+    //clear and redraw (and repeat)
+    updateGameArea();
+  });
 };
