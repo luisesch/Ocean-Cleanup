@@ -10,17 +10,35 @@ window.onload = function() {
     "./images/plastic4.png",
     "./images/plastic5.png",
     "./images/plastic6.png",
-    "./images/plastic7.png"
+    "./images/plastic7.png",
+    "./images/plastic8.png"
   ];
   var imageDiver = "";
   var level = 1;
-  var lives = 1;
+  var lives = 3;
   var gameStarted = false;
   var speechBubble = [];
   var score = 0;
   var hearts = [];
   var diverName = "";
   var returning = false;
+  var gravity = 0.1;
+
+  var plasticSound = new Audio(
+    "./sounds/446111__justinvoke__success-jingle.wav"
+  );
+  var coralSound = new Audio(
+    "./sounds/404747__owlstorm__retro-video-game-sfx-ouch.wav"
+  );
+  var heartSound = new Audio("./sounds/428156__higgs01__yay.wav");
+  var gameOverSound = new Audio(
+    "./sounds/76376__deleted-user-877451__game-over.wav"
+  );
+  var go = new Audio("./sounds/187409__mazk1985__robot-go.wav");
+  var countdownSound = new Audio(
+    "./sounds/270092__theriavirra__drumsticks-dave-weckl-evolution-open-wide-no3.wav"
+  );
+  var levelSound = new Audio("./sounds/353546__maxmakessounds__success.wav");
 
   //choose character on the start screen
   function selectDiver() {
@@ -107,7 +125,6 @@ window.onload = function() {
 
     //update the canvas and draw image
     update() {
-      // console.log(this.speedY);
       var ctx = myGameArea.context;
       var img = new Image();
       img.src = this.image;
@@ -118,7 +135,7 @@ window.onload = function() {
   //functions to get random plastic positions, plastic images and gaps between pieces of plastic
   function randomY() {
     return Math.floor(
-      Math.floor(Math.random() * (myGameArea.canvas.height - 120))
+      Math.floor(Math.random() * (myGameArea.canvas.height + 5 - 125))
     );
   }
 
@@ -168,13 +185,14 @@ window.onload = function() {
   }
 
   function levelDone(score) {
-    if (score >= 1) {
+    if (score >= 5) {
+      levelSound.play();
       $("canvas").remove();
       $("canvas").hide();
       plasticPieces = [];
       corals = [];
-      heart = [];
-      $("#level").html(level + 1);
+      hearts = [];
+      $("#level").html(Number(level) + 1);
       gameStarted = false;
       playerHighscore();
       $(".next-level-box").show();
@@ -192,6 +210,7 @@ window.onload = function() {
 
   function gameOver(lives) {
     if (lives == 0) {
+      gameOverSound.play();
       $("canvas").remove();
       $("canvas").hide();
       plasticPieces = [];
@@ -203,7 +222,7 @@ window.onload = function() {
       playerHighscore();
       $("#highscore").text(localStorage.getItem(diverName));
       gameStarted = false;
-      console.log(localStorage.getItem(diverName));
+      // console.log(localStorage.getItem(diverName));
     }
   }
 
@@ -221,7 +240,7 @@ window.onload = function() {
     //delete bubble after 0.5 seconds
     setTimeout(function() {
       speechBubble.shift();
-    }, 500);
+    }, 700);
   }
 
   function sortStorage(storage) {
@@ -246,6 +265,8 @@ window.onload = function() {
 
   var count = 3;
   function countdown() {
+    countdownSound.pause();
+    countdownSound.currentTime = 0;
     var ctx = myGameArea.context;
     if (count > 0) {
       ctx.clearRect(0, 0, 1000, 500);
@@ -254,8 +275,10 @@ window.onload = function() {
       ctx.fillStyle = "#092243 ";
       ctx.fillText(count, 450, 180);
       count--;
+      countdownSound.play();
       setTimeout(countdown, 1000);
     } else {
+      go.play();
       updateGameArea();
     }
   }
@@ -335,7 +358,12 @@ window.onload = function() {
     plasticPieces.forEach(function(plastic) {
       if (
         intersect(
-          { x: diver.x, y: diver.y, width: diver.width, height: diver.height },
+          {
+            x: diver.x,
+            y: diver.y + 5,
+            width: diver.width - 5,
+            height: diver.height - 5
+          },
           {
             x: plastic.x,
             y: plastic.y,
@@ -346,6 +374,9 @@ window.onload = function() {
       ) {
         // console.log("collide");
         //if they collide, increase score and move plastic out of the screen
+        if (score < 4) {
+          plasticSound.play();
+        }
         score++;
         plastic.x -= 1000;
       }
@@ -354,17 +385,25 @@ window.onload = function() {
     corals.forEach(function(coral) {
       if (
         intersect(
-          { x: diver.x, y: diver.y, width: diver.width, height: diver.height },
           {
-            x: coral.x + 10,
-            y: coral.y - 10,
-            width: coral.width - 10,
-            height: coral.height - 10
+            x: diver.x,
+            y: diver.y + 5,
+            width: diver.width - 5,
+            height: diver.height - 5
+          },
+          {
+            x: coral.x + 5,
+            y: coral.y + 5,
+            width: coral.width - 5,
+            height: coral.height - 5
           }
         ) &&
         coral.hit == false
       ) {
         //if they collide, increase coralsHit, draw speech bubble and check, if game over
+        if (lives > 1) {
+          coralSound.play();
+        }
         lives--;
         coral.hit = true;
         drawBubble();
@@ -376,16 +415,22 @@ window.onload = function() {
     hearts.forEach(function(heart) {
       if (
         intersect(
-          { x: diver.x, y: diver.y, width: diver.width, height: diver.height },
           {
-            x: heart.x,
-            y: heart.y,
-            width: heart.width,
-            height: heart.height
+            x: diver.x,
+            y: diver.y + 5,
+            width: diver.width - 5,
+            height: diver.height - 5
+          },
+          {
+            x: heart.x + 5,
+            y: heart.y + 5,
+            width: heart.width - 5,
+            height: heart.height - 5
           }
         )
       ) {
         //if they collide, increase coralsHit
+        heartSound.play();
         heart.y -= 1000;
         if (lives < 3) {
           lives++;
@@ -401,14 +446,14 @@ window.onload = function() {
   //control the diver
   document.onkeydown = function(event) {
     var key = event.keyCode;
-    if (key === 38 && diver.y > 0) {
+    if (key === 38 && diver.y > 5) {
       // console.log("moving up");
-      diver.y -= 5;
+      diver.y -= 15;
     } else if (
       key === 40 &&
       diver.y < myGameArea.canvas.height - diver.height
     ) {
-      diver.y += 5;
+      diver.y += 15;
     }
   };
 
@@ -450,8 +495,19 @@ window.onload = function() {
   });
 
   $("#enter-name-button").click(function() {
+    //check that name has been entered
     if ($("input").val() == "") {
       alert("Please enter your name.");
+      return;
+    }
+
+    diverName = $("input").val();
+    //check, if player really has played before, if not, alert and show back to start button
+    if (returning == true && !(diverName in localStorage)) {
+      alert(
+        "Are you sure that you've played before? Please enter your name the exact same way as last time."
+      );
+      $("#to-start-button").show();
       return;
     }
     $("#enter-name-button")
@@ -460,8 +516,16 @@ window.onload = function() {
     $("#start-game-button")
       .parent()
       .show();
-    diverName = $("input").val();
     playerHighscore();
+  });
+
+  $("#to-start-button").click(function() {
+    $("#to-start-button")
+      .parent()
+      .hide();
+    $("#welcome-button")
+      .parent()
+      .show();
   });
 
   $("#start-game-button").click(function() {

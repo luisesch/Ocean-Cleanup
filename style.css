@@ -51,7 +51,8 @@ img {
 .highscore-box,
 .credit,
 .instructions,
-.instructions2 {
+.instructions2,
+#to-start-button {
   display: none;
 }
 
