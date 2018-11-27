@@ -20,6 +20,7 @@ window.onload = function() {
   var score = 0;
   var hearts = [];
   var diverName = "";
+  var returning = false;
 
   //choose character on the start screen
   function selectDiver() {
@@ -415,12 +416,44 @@ window.onload = function() {
     $("#welcome-button")
       .parent()
       .hide();
+    $("#instructions-button")
+      .parent()
+      .show();
+  });
+
+  $("#returning-button").click(function() {
+    returning = true;
+    $("#returning-button")
+      .parent()
+      .hide();
+    $("#enter-name-button")
+      .parent()
+      .show();
+  });
+
+  $("#instructions-button").click(function() {
+    $("#instructions-button")
+      .parent()
+      .hide();
+    $("#instructions2-button")
+      .parent()
+      .show();
+  });
+
+  $("#instructions2-button").click(function() {
+    $("#instructions2-button")
+      .parent()
+      .hide();
     $("#enter-name-button")
       .parent()
       .show();
   });
 
   $("#enter-name-button").click(function() {
+    if ($("input").val() == "") {
+      alert("Please enter your name.");
+      return;
+    }
     $("#enter-name-button")
       .parent()
       .hide();
@@ -432,6 +465,9 @@ window.onload = function() {
   });
 
   $("#start-game-button").click(function() {
+    if (returning == true) {
+      level = localStorage.getItem(diverName);
+    }
     gameStarted = true;
     $("#start-game-button")
       .parent()

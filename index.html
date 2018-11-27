@@ -15,7 +15,7 @@
       href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
     />
     <link rel="stylesheet" href="style.css" />
-    <title>Game</title>
+    <title>Ocean Cleanup</title>
   </head>
   <body>
     <div class="score-box container row">
@@ -26,17 +26,67 @@
     <div class="background container">
       <div class="start-box">
         <div class="welcome">
-          <h1>Collect the plastic</h1>
+          <h1>Ocean Cleanup</h1>
           <br />
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus
-            lobortis sagittis suscipit. Cras suscipit, lorem quis hendrerit
-            ultrices, lectus arcu consectetur risus, eu consectetur nisi sapien
-            vel justo.
+            Welcome and thank you for your support!<br /><br />
+            Want to help clean the ocean from plastic bags, bottles and coffee
+            cups?<br />
+            Click on the button to learn how.
           </p>
           <br />
           <button id="welcome-button" class="btn btn-default btn-lg">
             LET'S GO
+          </button>
+          <button id="returning-button" class="btn btn-default btn-lg">
+            RETURNING PLAYER
+          </button>
+        </div>
+
+        <div class="instructions">
+          <h1>Instructions</h1>
+          <br />
+          <p>
+            Move the diver up and down using the arrows on your keyboard<br /><br />
+          </p>
+          <div class="row">
+            <div class="col-sm-4"></div>
+            <img src="./images/arrows.png" class="col-sm-4" />
+            <div class="col-sm-4"></div>
+          </div>
+          <br />
+          <button id="instructions-button" class="btn btn-default btn-lg">
+            GOT IT
+          </button>
+        </div>
+
+        <div class="instructions2">
+          <h1>Instructions</h1>
+          <br />
+          <p>Collect all the pieces of plastic...</p>
+          <br />
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <img src="./images/plastic.png" class="col-sm-2" />
+            <img src="./images/plastic1.png" class="col-sm-2" />
+            <img src="./images/plastic2.png" class="col-sm-2" />
+            <img src="./images/plastic3.png" class="col-sm-2" />
+            <div class="col-sm-2"></div>
+          </div>
+          <br />
+          <p>... but make sure to avoid the fire corals.</p>
+          <br />
+          <div class="row">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2"></div>
+            <img src="./images/coral.png" class="col-sm-2" />
+            <img src="./images/coral.png" class="col-sm-2" />
+            <div class="col-sm-2"></div>
+            <div class="col-sm-2"></div>
+          </div>
+          <br />
+          <button id="instructions2-button" class="btn btn-default btn-lg">
+            OKAY
           </button>
         </div>
 
@@ -79,8 +129,9 @@
       </div>
 
       <div class="game-over-box">
+        <h1>Game over :(</h1>
+        <br />
         <p>
-          <h1>Game over :(</h1> <br />
           You made it to level <span id="final-level"></span> <br /><br />
           Your highscore: <span id="highscore"></span>
         </p>
@@ -96,12 +147,8 @@
       <div class="highscore-box">
         <h1>TOP 5</h1>
         <div class="highscore">
-          <div class="highscore-left col-sm-6">
-            <h2>Player</h2>
-          </div>
-          <div class="highscore-right col-sm-6">
-            <h2>Level</h2>
-          </div>
+          <div class="highscore-left col-sm-6"><h2>Player</h2></div>
+          <div class="highscore-right col-sm-6"><h2>Level</h2></div>
         </div>
         <button class="restart-button btn btn-default btn-lg">NEW GAME</button>
         <button id="clear-button" class="btn btn-default btn-lg">

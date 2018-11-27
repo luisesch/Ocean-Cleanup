@@ -49,7 +49,9 @@ img {
 .game-over-box,
 .score-box,
 .highscore-box,
-.credit {
+.credit,
+.instructions,
+.instructions2 {
   display: none;
 }
 
