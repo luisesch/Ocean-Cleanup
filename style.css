@@ -9,7 +9,7 @@ body {
 
 canvas {
   width: 100%;
-  height: 100%;
+  height: auto;
 }
 /* background-image: url("images/background.png");
   background-size: cover; */
@@ -17,6 +17,12 @@ canvas {
 
 img {
   width: 40%;
+}
+
+.container {
+  margin: 0;
+  margin-right: 0;
+  padding: 0;
 }
 
 .form-control {
@@ -34,12 +40,12 @@ img {
   text-align: center;
   background-color: #092243;
   color: white;
-  padding: 20px;
+  padding: 10%;
   border-radius: 10px;
 }
 
 .start-box {
-  padding: 30px;
+  padding: 10%;
 }
 
 .enter-name,
@@ -85,12 +91,5 @@ img {
 }
 
 .btn {
-  margin: 20px 10px;
-}
-
-.credit {
-  position: fixed;
-  bottom: 0px;
-  margin-left: 5px;
-  color: white;
+  margin: 5% 2.5%;
 }

@@ -146,7 +146,7 @@ window.onload = function() {
 
   function randomGap() {
     var max = 200;
-    var min = 50;
+    var min = 30;
     return Math.floor(Math.random() * (max - min)) + min;
   }
 
@@ -520,6 +520,7 @@ window.onload = function() {
   });
 
   $("#to-start-button").click(function() {
+    returning = false;
     $("#to-start-button")
       .parent()
       .hide();
