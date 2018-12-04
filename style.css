@@ -11,17 +11,12 @@ canvas {
   width: 100%;
   height: auto;
 }
-/* background-image: url("images/background.png");
-  background-size: cover; */
-/* } */
 
 img {
   width: 40%;
 }
 
 .container {
-  margin: 0;
-  margin-right: 0;
   padding: 0;
 }
 
@@ -67,6 +62,7 @@ img {
   color: white;
   font-size: 20px;
   padding: 10px;
+  margin: auto;
 }
 
 .level-box {
