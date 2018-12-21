@@ -257,6 +257,8 @@ window.onload = function() {
   }
 
   function writeHighScore(array) {
+    $(".highscore-left").html("<h2>Player</h2>");
+    $(".highscore-right").html("<h2>Player</h2>");
     for (var i = 0; i < localStorage.length && i < 5; i++) {
       $(".highscore-left").append(array[i][0] + "<br>");
       $(".highscore-right").append(array[i][1] + "<br>");
